@@ -3,7 +3,7 @@ home: true
 config:
   -
     type: banner
-    banner: /images/bj/1.png
+    banner: https://img.vinua.cn/images/IVMoX.jpg
     bannerMask:
       light: 0.1
       dark: 0.3
