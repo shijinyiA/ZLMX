@@ -3,7 +3,7 @@ home: true
 config:
   -
     type: banner
-    banner: https://img.vinua.cn/images/IqcrJ.jpg
+    banner: /images/bj/1.png
     bannerMask:
       light: 0.1
       dark: 0.3

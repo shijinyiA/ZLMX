@@ -5,7 +5,7 @@ sticky: 100
 tags:
   - Liunx搭建教程
   - Yunzai
-permalink: /article/k88egsbh/
+permalink: /article/d1iqkut0/
 ---
 
 ## 购买服务器
