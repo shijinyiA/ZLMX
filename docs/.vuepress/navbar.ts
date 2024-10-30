@@ -17,7 +17,7 @@ export const zhNavbar = defineNavbarConfig([
   {
     text: '更多',
     items: [
-      { text: '更新日志', link: '/更多/更新日志.md'},
+      { text: '建站历程', link: '/更多/建站历程.md'},
       { text: '关于我们', link: '/更多/关于我们.md'},
       { text: '联系我们', link: '/更多/联系我们.md'},
       { text: '友情链接', link: '/更多/友情链接.md'},

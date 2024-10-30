@@ -3,7 +3,7 @@ home: true
 config:
   -
     type: banner
-    banner: https://img.vinua.cn/images/IVMoX.jpg
+    banner: https://t.mwm.moe/pc
     bannerMask:
       light: 0.1
       dark: 0.3
