@@ -1,6 +1,7 @@
 import { defineThemeConfig } from 'vuepress-theme-plume'
 import { enNavbar, zhNavbar } from './navbar'
 import { enNotes, zhNotes } from './notes'
+import path from 'node:path'
 
 /**
  * @see https://theme-plume.vuejs.press/config/basic/
@@ -12,11 +13,11 @@ export default defineThemeConfig({
   docsDir: 'docs',
   
   footer: {
-  message: '©2024 By 岩王帝君版权所有保留一切解释权利<span style="display: inline-flex;vertical-align: middle;margin-right:4px;"><img src="https://img.vinua.cn/images/Iqf4j.png"width="16px"><code class="html"></span><a href="https://beian.mps.gov.cn/#/query/webSearch?code=51072502110071">川公网安备51072502110071号',
-  copyright: '<span style="display: inline-flex;vertical-align: middle;margin-right:4px;"><img src="https://img.vinua.cn/images/Iq2ZV.png"width="16px"><code class="html"><a href="https://beian.miit.gov.cn/#/home">蜀ICP备2024093216号',
+  message: '©2024 By 岩王帝君版权所有保留一切解释权利<span style="display: inline-flex;vertical-align: middle;margin-right:4px;"><img src="/images/bah/1.png"width="16px"><code class="html"></span><a href="https://beian.mps.gov.cn/#/query/webSearch?code=51072502110071">川公网安备51072502110071号',
+  copyright: '<span style="display: inline-flex;vertical-align: middle;margin-right:4px;"><img src="/images/bah/2.png"width="16px"><code class="html"><a href="https://beian.miit.gov.cn/#/home">蜀ICP备2024093216号',
 },  
   appearance: true,
-
+  
   social: [
     { icon: 'qq', link: '/' },
   ],
@@ -49,4 +50,12 @@ export default defineThemeConfig({
       notes: enNotes,
     },
   },
+  
+    bulletin: {
+    layout: 'bottom-right',
+    lifetime: 'always',
+    title: '🎉 公告 🎉',
+    contentFile: path.join(__dirname, 'bulletin.md'),
+    enablePage: page => page.path === '/',
+  },  
 })

@@ -3,7 +3,7 @@ home: true
 config:
   -
     type: banner
-    banner: /images/bj/1.png
+    banner: https://t.mwm.moe/pc
     bannerMask:
       light: 0.1
       dark: 0.3

@@ -1,5 +1,5 @@
 import comp from "/data/data/com.termux/files/home/my-project1/docs/.vuepress/.temp/pages/en/blog/tags/index.html.vue"
-const data = JSON.parse("{\"path\":\"/en/blog/tags/\",\"title\":\"Tags\",\"lang\":\"en-US\",\"frontmatter\":{\"lang\":\"en-US\",\"title\":\"Tags\",\"draft\":true},\"headers\":[],\"readingTime\":{\"minutes\":0,\"words\":0},\"filePathRelative\":null,\"type\":\"blog-tags\"}")
+const data = JSON.parse("{\"path\":\"/en/blog/tags/\",\"title\":\"Tags\",\"lang\":\"en-US\",\"frontmatter\":{\"lang\":\"en-US\",\"title\":\"Tags\",\"draft\":true},\"headers\":[],\"readingTime\":{\"minutes\":0,\"words\":0},\"filePathRelative\":null,\"type\":\"blog-tags\",\"bulletin\":false}")
 export { comp, data }
 
 if (import.meta.webpackHot) {

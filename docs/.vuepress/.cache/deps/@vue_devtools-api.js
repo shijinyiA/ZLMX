@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@vue+devtools-shared@7.5.2/node_modules/@vue/devtools-shared/dist/index.js
+// node_modules/.pnpm/@vue+devtools-shared@7.5.6/node_modules/@vue/devtools-shared/dist/index.js
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -28,7 +28,7 @@ var __toESM = (mod, isNodeMode, target2) => (target2 = mod != null ? __create(__
   mod
 ));
 var init_esm_shims = __esm({
-  "../../node_modules/.pnpm/tsup@8.3.0_@microsoft+api-extractor@7.43.0_@types+node@20.16.11__@swc+core@1.5.29_jiti@2.0.0__khi6fwhekjxtif3xyxfitrs5gq/node_modules/tsup/assets/esm_shims.js"() {
+  "../../node_modules/.pnpm/tsup@8.3.0_@microsoft+api-extractor@7.43.0_@types+node@20.16.14__@swc+core@1.5.29_jiti@2.0.0__utvtwgyeu6xd57udthcnogp47u/node_modules/tsup/assets/esm_shims.js"() {
     "use strict";
   }
 });
@@ -524,7 +524,7 @@ function createHooks() {
 var { clearTimeout: clearTimeout2, setTimeout: setTimeout2 } = globalThis;
 var random = Math.random.bind(Math);
 
-// node_modules/.pnpm/@vue+devtools-kit@7.5.2/node_modules/@vue/devtools-kit/dist/index.js
+// node_modules/.pnpm/@vue+devtools-kit@7.5.6/node_modules/@vue/devtools-kit/dist/index.js
 var __create2 = Object.create;
 var __defProp2 = Object.defineProperty;
 var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
@@ -554,7 +554,7 @@ var __toESM2 = (mod, isNodeMode, target22) => (target22 = mod != null ? __create
   mod
 ));
 var init_esm_shims2 = __esm2({
-  "../../node_modules/.pnpm/tsup@8.3.0_@microsoft+api-extractor@7.43.0_@types+node@20.16.11__@swc+core@1.5.29_jiti@2.0.0__khi6fwhekjxtif3xyxfitrs5gq/node_modules/tsup/assets/esm_shims.js"() {
+  "../../node_modules/.pnpm/tsup@8.3.0_@microsoft+api-extractor@7.43.0_@types+node@20.16.14__@swc+core@1.5.29_jiti@2.0.0__utvtwgyeu6xd57udthcnogp47u/node_modules/tsup/assets/esm_shims.js"() {
     "use strict";
   }
 });
@@ -2664,7 +2664,7 @@ init_esm_shims2();
 init_esm_shims2();
 var TIMELINE_LAYERS_STATE_STORAGE_ID = "__VUE_DEVTOOLS_KIT_TIMELINE_LAYERS_STATE__";
 function getTimelineLayersStateFromStorage() {
-  if (!isBrowser || typeof localStorage === "undefined") {
+  if (!isBrowser || typeof localStorage === "undefined" || localStorage === null) {
     return {
       recordingState: false,
       mouseEventEnabled: false,
@@ -2696,6 +2696,7 @@ var devtoolsTimelineLayers = new Proxy(target.__VUE_DEVTOOLS_KIT_TIMELINE_LAYERS
   }
 });
 function addTimelineLayer(options, descriptor) {
+  devtoolsState.timelineLayersState[descriptor.id] = false;
   devtoolsTimelineLayers.push({
     ...options,
     descriptorId: descriptor.id,
@@ -2784,9 +2785,9 @@ function createDevToolsCtxHooks() {
   hooks2.hook("addInspector", ({ inspector, plugin }) => {
     addInspector(inspector, plugin.descriptor);
   });
-  hooks2.hook("sendInspectorTree", async ({ inspectorId, plugin }) => {
+  const debounceSendInspectorTree = debounce(async ({ inspectorId, plugin }) => {
     var _a25;
-    if (!inspectorId || !((_a25 = plugin == null ? void 0 : plugin.descriptor) == null ? void 0 : _a25.app))
+    if (!inspectorId || !((_a25 = plugin == null ? void 0 : plugin.descriptor) == null ? void 0 : _a25.app) || devtoolsState.highPerfModeEnabled)
       return;
     const inspector = getInspector(inspectorId, plugin.descriptor.app);
     const _payload = {
@@ -2815,10 +2816,11 @@ function createDevToolsCtxHooks() {
       "sendInspectorTreeToClient"
       /* SEND_INSPECTOR_TREE_TO_CLIENT */
     );
-  });
-  hooks2.hook("sendInspectorState", async ({ inspectorId, plugin }) => {
+  }, 120);
+  hooks2.hook("sendInspectorTree", debounceSendInspectorTree);
+  const debounceSendInspectorState = debounce(async ({ inspectorId, plugin }) => {
     var _a25;
-    if (!inspectorId || !((_a25 = plugin == null ? void 0 : plugin.descriptor) == null ? void 0 : _a25.app))
+    if (!inspectorId || !((_a25 = plugin == null ? void 0 : plugin.descriptor) == null ? void 0 : _a25.app) || devtoolsState.highPerfModeEnabled)
       return;
     const inspector = getInspector(inspectorId, plugin.descriptor.app);
     const _payload = {
@@ -2853,7 +2855,8 @@ function createDevToolsCtxHooks() {
       "sendInspectorStateToClient"
       /* SEND_INSPECTOR_STATE_TO_CLIENT */
     );
-  });
+  }, 120);
+  hooks2.hook("sendInspectorState", debounceSendInspectorState);
   hooks2.hook("customInspectorSelectNode", ({ inspectorId, nodeId, plugin }) => {
     const inspector = getInspector(inspectorId, plugin.descriptor.app);
     if (!inspector)
@@ -2864,6 +2867,10 @@ function createDevToolsCtxHooks() {
     addTimelineLayer(options, plugin.descriptor);
   });
   hooks2.hook("timelineEventAdded", ({ options, plugin }) => {
+    var _a25;
+    const internalLayerIds = ["performance", "component-event", "keyboard", "mouse"];
+    if (devtoolsState.highPerfModeEnabled || !((_a25 = devtoolsState.timelineLayersState) == null ? void 0 : _a25[plugin.descriptor.id]) && !internalLayerIds.includes(options.layerId))
+      return;
     hooks2.callHookWith(
       async (callbacks) => {
         await Promise.all(callbacks.map((cb) => cb(options)));
@@ -3450,6 +3457,8 @@ function normalizeRouterInfo(appRecord, activeAppRecord2) {
     if (((_a25 = activeAppRecord2.value) == null ? void 0 : _a25.app) !== appRecord.app)
       return;
     init();
+    if (devtoolsState.highPerfModeEnabled)
+      return;
     devtoolsContext.hooks.callHook("routerInfoUpdated", { state: target[ROUTER_INFO_KEY] });
   }, 200));
 }
