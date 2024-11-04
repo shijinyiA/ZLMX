@@ -1,6 +1,10 @@
 ::: center
 
-欢迎来到我的博客
+## 本网站负责人推出Yunzai机器人 免费 代挂服务
+
+欢迎大家使用
+
+[点击查看详情](https://www.lzqxcd.cn)
 
 ![1](https://v1.jinrishici.com/all.svg)
 

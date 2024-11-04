@@ -54,7 +54,7 @@ export default defineThemeConfig({
     bulletin: {
     layout: 'bottom-right',
     lifetime: 'always',
-    title: '🎉 公告 🎉',
+    title: '🎉 通知 通知 🎉',
     contentFile: path.join(__dirname, 'bulletin.md'),
     enablePage: page => page.path === '/',
   },  

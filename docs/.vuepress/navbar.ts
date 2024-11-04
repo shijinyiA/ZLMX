@@ -25,6 +25,7 @@ export const zhNavbar = defineNavbarConfig([
         text: 'link',
         items: [
           { text: '下载站', link: 'https://download.yunzaibot.cn/'},
+          { text: '免费代挂', link: 'https://www.lzqxcd.cn/'},
         ],
       },      
     ],

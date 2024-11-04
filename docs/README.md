@@ -19,5 +19,21 @@ config:
         -
           text: QQ
           link: https://qm.qq.com/q/vvZdF4Boie
-          theme: alt
+          theme: alt            
+  -
+    type: 'your-component'
+    # 1234            
+  -
+    type: features
+    features:
+      -
+        title: TRSS Script
+        icon: 🌌
+        link: /搭建/1.md
+        details: 一键安装、启动、管理项目
+      -
+        title: Plugins
+        icon: 📖
+        link: /插件/插件.md
+        details: Yunzai的插件
 ---
